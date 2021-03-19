@@ -16,7 +16,7 @@ class Dealer:
         self.table = Table(self.slots_number)
         self.slots = []
 
-        for self.slot_id in range(0, self.slots_number + 1):
+        for self.slot_id in range(0, self.slots_number):
             self.table.create_slot(self.slot_id)
 
         for player_id in players:
@@ -39,7 +39,6 @@ class Table:
 
     def __init__(self, slot_numbers: int):
         self.slot_numbers = slot_numbers
-        self.slots = [Player_Slot(f"slot_{i}") for i in range(slot_numbers)]
         self.players = []
         self.player_slots = []
 
@@ -51,9 +50,8 @@ class Table:
 
 
 class Player_Slot:
-    def __init__(self, slot_id: str):
-        self.slot_id = slot_id
-
+    def __init__(self, slot_id: int):
+        self.slot_id = slot_id + 1
 
 class Player:
     def __init__(self, player_id):
@@ -64,4 +62,5 @@ class Player:
 the_list_of_players = ['soawesomesonic', 'filinfilin', 'Nightcrowler28', '1', '3', '5', '88', '99']
 dealer = Dealer()
 dealer.rule_game(the_list_of_players)
-print(dealer.table.player_slots[7].slot_id)
+for i in range (0, len(dealer.table.player_slots)) :
+    print(i, dealer.table.player_slots[i].slot_id)
