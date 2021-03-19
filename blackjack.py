@@ -13,21 +13,27 @@ def create_deck():
     return deck
 
 
+class Dealer:
+    """
+    game logic class, created for rule the game
+    """
+
+    def __init__(self):  # initialization
+        pass
+
+    def rule_game(self):  # rule game
+        pass
+
+
 class Table:
-    def __init__(self):
-        player_slot = 7
+    def __init__(self, slot_numbers):
+        self.slot_numbers = slot_numbers
+        self.slots = [Player_Slot(f"slot_{i}") for i in range(slot_numbers)]
 
-    def create_dealer(self):
-        class Dealer:
-            def __init__(self):
-                self.deck = [1, 2, 3]
-                self.deck = create_deck()
-                random.shuffle(self.deck)
-
-        self.dealer = Dealer()
+    def assign_id(self):  # makes unique id for new slot, while new player slot will be created
+        pass
 
 
-
-table = Table()
-table.create_dealer()
-print(table.dealer.deck)
+class Player_Slot():
+    def __init__(self, slot_id: str):
+        self.slot_id = slot_id
