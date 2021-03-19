@@ -1,7 +1,6 @@
 import random
 
 
-
 class Dealer:
     """
     game logic class, created for rule the game
@@ -15,9 +14,13 @@ class Dealer:
         self.players = players
         self.slots_number = 7
         self.table = Table(self.slots_number)
+        self.slots = []
+
+        for self.slot_id in range(0, self.slots_number + 1):
+            self.table.create_slot(self.slot_id)
+
         for player_id in players:
             self.table.create_player(player_id)
-            print(self.table.players[-1].player_id)
         pass
 
     def create_deck(self):
@@ -38,9 +41,13 @@ class Table:
         self.slot_numbers = slot_numbers
         self.slots = [Player_Slot(f"slot_{i}") for i in range(slot_numbers)]
         self.players = []
+        self.player_slots = []
 
     def create_player(self, player_id: str):  # player takes a seat
         self.players.append(Player(player_id))
+
+    def create_slot(self, slot_id: int):
+        self.player_slots.append(Player_Slot(slot_id))
 
 
 class Player_Slot:
@@ -54,8 +61,7 @@ class Player:
         self.player_hand = []
 
 
-
-the_list_of_players = ['soawesomesonic', 'filinfilin', 'Nightcrowler28']
+the_list_of_players = ['soawesomesonic', 'filinfilin', 'Nightcrowler28', '1', '3', '5', '88', '99']
 dealer = Dealer()
 dealer.rule_game(the_list_of_players)
-print(dealer.create_deck())
+print(dealer.table.player_slots[7].slot_id)
