@@ -19,21 +19,42 @@ class Dealer:
     """
 
     def __init__(self):  # initialization
+
         pass
 
     def rule_game(self):  # rule game
+        self.slots_number = 7
+        self.table = Table(self.slots_number)
+
         pass
 
 
 class Table:
+
     def __init__(self, slot_numbers):
         self.slot_numbers = slot_numbers
         self.slots = [Player_Slot(f"slot_{i}") for i in range(slot_numbers)]
+        self.players = []
 
-    def assign_id(self):  # makes unique id for new slot, while new player slot will be created
-        pass
+    def create_player(self, player_id):  # player takes a seat
+        self.players.append(Player({player_id}))
 
 
-class Player_Slot():
+class Player_Slot:
     def __init__(self, slot_id: str):
         self.slot_id = slot_id
+
+
+class Player:
+    def __init__(self, player_id):
+        self.player_id = player_id
+        self.player_hand = []
+
+
+table = Table(5)
+table.create_player('sonic')
+print(table.players[-1].player_id)
+table.create_player('Kuprin_x')
+print(table.players[-1].player_hand)
+table.create_player('Fae_1000')
+print(table.players[-1].player_id)
