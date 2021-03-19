@@ -1,6 +1,7 @@
 import random
 
 
+
 def create_deck():
     card_values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     card_suits = ['♠', '♦', '♥', '♣']
@@ -16,27 +17,30 @@ def create_deck():
 class Dealer:
     """
     game logic class, created for rule the game
+    players - list of players, inputted by user interface !blackjack
     """
 
     def __init__(self):  # initialization
-
         pass
 
-    def rule_game(self):  # rule game
+    def rule_game(self, players: list):  # rule game
+        self.players = players
         self.slots_number = 7
         self.table = Table(self.slots_number)
-
+        for player_id in players:
+            self.table.create_player(player_id)
+            print(self.table.players[-1].player_id)
         pass
 
 
 class Table:
 
-    def __init__(self, slot_numbers):
+    def __init__(self, slot_numbers: int):
         self.slot_numbers = slot_numbers
         self.slots = [Player_Slot(f"slot_{i}") for i in range(slot_numbers)]
         self.players = []
 
-    def create_player(self, player_id):  # player takes a seat
+    def create_player(self, player_id: str):  # player takes a seat
         self.players.append(Player({player_id}))
 
 
@@ -51,10 +55,7 @@ class Player:
         self.player_hand = []
 
 
-table = Table(5)
-table.create_player('sonic')
-print(table.players[-1].player_id)
-table.create_player('Kuprin_x')
-print(table.players[-1].player_hand)
-table.create_player('Fae_1000')
-print(table.players[-1].player_id)
+
+the_list_of_players = ['soawesomesonic', 'filinfilin', 'Nightcrawler28']
+dealer = Dealer()
+dealer.rule_game(the_list_of_players)
