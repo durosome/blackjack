@@ -73,15 +73,18 @@ class Player_Slot:
 
     example usage:
         we can get
-            * slot_id it is basically positional number of slot #TODO maybe we can delete this attribute
+            * slot_id
+                    is basically positional number of slot #TODO maybe we can delete this attribute
             - Dealer.Table.Player_Slot[11].slot_id
                 --it will return us a player_id, looks like: '11'
 
-            * player_id of player in 7th slot on the table
+            * player_id
+                    is player in 7th slot on the table
             - Dealer.Table.Player_Slot[7].player_id
                 -it will return us a player_id, looks like: 'soawesomesonic'
 
-            * hand of player in 3rd slot on the table
+            * hand
+                    hand of player in 3rd slot on the table
             - Dealer.Table.Player_Slot[3].player_hand
                 -it will return us a hand, looks like: ['4♣', 'K♦']
 
@@ -94,8 +97,16 @@ class Player_Slot:
 
 class Player:
     """
-    the_list_of_players[0] should always be dealer
-        it's reserved slot for concrete DEALER
+    now it's absolutely useless class, but in future we will add some attributes, like twitch_points
+    example usage:
+        we can get
+            * player_id
+                    just id of player
+            - Dealer.Table.Player[0].player_id
+                -it will return a player_id, looks like: 'dealer' #always return dealer from 0th slot, cause it reserves for DEALER
+
+            - Dealer.Table.Player[1].player_id
+                -it will return a player_id, looks like: 'soawesomesonic'
 
 
     """
@@ -105,6 +116,8 @@ class Player:
 
 
 the_list_of_players = ['dealer', 'soawesomesonic', 'filinfilin', 'Nightcrowler28', '1', '3', '5', '88', '99']
+# the_list_of_players[0] should always be dealer
+
 dealer = Dealer()
 dealer.rule_game(the_list_of_players)
 
