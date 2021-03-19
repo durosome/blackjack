@@ -40,7 +40,7 @@ class Table:
         self.players = []
 
     def create_player(self, player_id: str):  # player takes a seat
-        self.players.append(Player({player_id}))
+        self.players.append(Player(player_id))
 
 
 class Player_Slot:
