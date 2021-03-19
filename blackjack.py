@@ -2,18 +2,6 @@ import random
 
 
 
-def create_deck():
-    card_values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-    card_suits = ['♠', '♦', '♥', '♣']
-    deck = []
-
-    for suit in card_suits:
-        for value in card_values:
-            deck.append(value + suit)
-
-    return deck
-
-
 class Dealer:
     """
     game logic class, created for rule the game
@@ -31,6 +19,17 @@ class Dealer:
             self.table.create_player(player_id)
             print(self.table.players[-1].player_id)
         pass
+
+    def create_deck(self):
+        card_values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+        card_suits = ['♠', '♦', '♥', '♣']
+        self.deck = []
+
+        for suit in card_suits:
+            for value in card_values:
+                self.deck.append(value + suit)
+
+        return self.deck
 
 
 class Table:
@@ -56,6 +55,7 @@ class Player:
 
 
 
-the_list_of_players = ['soawesomesonic', 'filinfilin', 'Nightcrawler28']
+the_list_of_players = ['soawesomesonic', 'filinfilin', 'Nightcrowler28']
 dealer = Dealer()
 dealer.rule_game(the_list_of_players)
+print(dealer.create_deck())
