@@ -38,9 +38,9 @@ class Round:
         self.create_deck()
 
         for slot_id in range(0, len(players)):  # putting the Players to the Table_Slots
-            if len(self.table.table_slots) < self.max_slots + 1:  # limit the number of players
-                self.table.create_slot(slot_id)
-                self.table.create_player(players[slot_id])
+            if len(self.table.table_slots) < self.max_slots + 1:   # limit the number of players
+                self.table.create_player(players[slot_id])         # create player
+                self.table.create_slot(slot_id, players[slot_id])  # create slot
 
                 print(self.table.table_slots[slot_id].player_id)
                 self.table.table_slots[slot_id].hand.append(self.put_card_in_hand(self.table.table_slots[slot_id].hand))
@@ -76,8 +76,8 @@ class Table:
     def create_player(self, player_id: str):  # player enters the table and want to play
         self.players.append(Player(player_id))
 
-    def create_slot(self, slot_id: int):
-        self.table_slots.append(Table_Slot(slot_id))
+    def create_slot(self, slot_id: int, player_id):
+        self.table_slots.append(Table_Slot(slot_id, player_id))
 
 
 class Table_Slot:
@@ -116,10 +116,9 @@ class Table_Slot:
 
     """
 
-    def __init__(self, slot_id: int):
+    def __init__(self, slot_id: int, player_id):
         self.slot_id = slot_id
-        # TODO: we have a bug. attribute player.id in Class Player.Slot is empty
-        self.player_id = ''
+        self.player_id = player_id
         self.hand = []
 
 
@@ -149,4 +148,4 @@ dealer = Dealer()
 new_round = Round(the_list_of_players)
 
 for i in range(0, len(new_round.table.table_slots)):
-    print(new_round.table.table_slots[i].player_id, 's hand: ', new_round.table.table_slots[i])
+    print(new_round.table.table_slots[i].player_id, 's hand: ', new_round.table.table_slots[i].hand)
