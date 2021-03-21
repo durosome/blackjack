@@ -91,16 +91,20 @@ class Dealer:
 
         return (hand_sum)
 
-    #def game_state(self):
-     #   if Round.Table.Table_Slot[3].hand
-     #   return(true)
+    def game_state(self):
+        return(true)
 
 
     def rule_game(self):  # rule game
-        #while True:
 
         pass
 
+    def check_bust(self, hand):
+        print(dealer.count_hand(hand))
+        if dealer.count_hand(hand) > 21:
+            return('Lose')
+        else:
+            return('OK')
 
 class Table:
 
@@ -157,6 +161,9 @@ class Table_Slot:
         self.hand = []
 
 
+
+
+
 class Player:
     """
     now it's absolutely useless class, but in future we will add some attributes, like twitch_points
@@ -177,11 +184,11 @@ class Player:
         self.player_id = player_id
 
 
-the_list_of_players = ['dealer', 'soawesomesonic', 'filinfilin', 'Nightcrowler28', '1', '3', '5', '88', '99', 'dealer']
+the_list_of_players = ['dealer', 'soawesomesonic', 'filinfilin', 'Nightcrowler28', 'Fae_1000', 'Askarchik2282', 'Dima243', 'Are_You_Ready_88', 'Grigory_Skovoroda', '0deala']
 
 dealer = Dealer()
 
 
 for i in range(0, len(dealer.new_round.table.table_slots)):
-    print(dealer.new_round.table.table_slots[i].player_id, 's hand: \n', dealer.new_round.table.table_slots[i].hand, 'Value: ',
-          dealer.count_hand(dealer.new_round.table.table_slots[i].hand))
+    print('\n', dealer.new_round.table.table_slots[i].player_id, 's hand: ', dealer.new_round.table.table_slots[i].hand, '\nValue: ',
+          dealer.count_hand(dealer.new_round.table.table_slots[i].hand), '\nBust state:', dealer.check_bust(dealer.new_round.table.table_slots[i].hand))
