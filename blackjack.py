@@ -118,6 +118,7 @@ class Table_Slot:
 
     def __init__(self, slot_id: int):
         self.slot_id = slot_id
+        # TODO: we have a bug. attribute player.id in Class Player.Slot is empty
         self.player_id = ''
         self.hand = []
 
@@ -147,6 +148,5 @@ the_list_of_players = ['dealer', 'soawesomesonic', 'filinfilin', 'Nightcrowler28
 dealer = Dealer()
 new_round = Round(the_list_of_players)
 
-#for i in range(0, len(new_round.table.table_slots)):
-#    print(new_round.table.table_slots[i].player_id, 's hand: ', new_round.table.table_slots[i])
-new_round.table.table_slots[1].player_id
+for i in range(0, len(new_round.table.table_slots)):
+    print(new_round.table.table_slots[i].player_id, 's hand: ', new_round.table.table_slots[i])
