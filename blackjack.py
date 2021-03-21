@@ -41,10 +41,8 @@ class Round:
             if len(self.table.table_slots) < self.max_slots + 1:   # limit the number of players
                 self.table.create_player(players[slot_id])         # create player
                 self.table.create_slot(slot_id, players[slot_id])  # create slot
-
-                print(self.table.table_slots[slot_id].player_id)
-                self.table.table_slots[slot_id].hand.append(self.put_card_in_hand(self.table.table_slots[slot_id].hand))
-                self.table.table_slots[slot_id].hand.append(self.put_card_in_hand(self.table.table_slots[slot_id].hand))
+                self.put_card_in_hand(self.table.table_slots[slot_id].hand)
+                self.put_card_in_hand(self.table.table_slots[slot_id].hand)
 
     def create_deck(self):
         card_values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
@@ -64,7 +62,7 @@ class Round:
     def put_card_in_hand(self, hand):
         card = self.give_card()
         hand.append(card)
-        return hand
+        return card
 
 
 class Table:
@@ -101,22 +99,22 @@ class Table_Slot:
         we can get
             * slot_id
                     is basically positional number of slot #TODO maybe we can delete this attribute
-            - Dealer.Table.Player_Slot[11].slot_id
+            - Dealer.Table.Table_Slot[11].slot_id
                 --it will return us a player_id, looks like: '11'
 
             * player_id
                     is player in 7th slot on the table
-            - Dealer.Table.Player_Slot[7].player_id
+            - Dealer.Table.Table_Slot[7].player_id
                 -it will return us a player_id, looks like: 'soawesomesonic'
 
             * hand
                     hand of player in 3rd slot on the table
-            - Dealer.Table.Player_Slot[3].player_hand
+            - Round.Table.Table_Slot[3].hand
                 -it will return us a hand, looks like: ['4♣', 'K♦']
 
     """
 
-    def __init__(self, slot_id: int, player_id):
+    def __init__(self, slot_id: int, player_id: str):
         self.slot_id = slot_id
         self.player_id = player_id
         self.hand = []
