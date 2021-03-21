@@ -21,7 +21,7 @@ class Round:
         * create Table
         * create Table_Slots, bend Players to the Table_Slot by slot.id
         * create deck
-        * # todo give cards from the deck to the Table_Slots
+        * give cards from the deck to the Table_Slots
 
     players - list of players, inputted by user interface !blackjack
         example of list:
@@ -35,12 +35,16 @@ class Round:
         self.max_slots = 7  # numbers of possible players at the table, defines from rules of the game
 
         self.table = Table()
+        self.create_deck()
 
         for slot_id in range(0, len(players)):  # putting the Players to the Table_Slots
-            if len(self.table.table_slots) < self.max_slots + 1: # limit the number of players
+            if len(self.table.table_slots) < self.max_slots + 1:  # limit the number of players
                 self.table.create_slot(slot_id)
                 self.table.create_player(players[slot_id])
-        self.create_deck()
+
+                print(self.table.table_slots[slot_id].player_id)
+                self.table.table_slots[slot_id].hand.append(self.put_card_in_hand(self.table.table_slots[slot_id].hand))
+                self.table.table_slots[slot_id].hand.append(self.put_card_in_hand(self.table.table_slots[slot_id].hand))
 
     def create_deck(self):
         card_values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
@@ -51,6 +55,16 @@ class Round:
                 self.deck.append(value + suit)
 
         return self.deck
+
+    def give_card(self):
+        card = random.choice(self.deck)
+        self.deck.remove(card)
+        return card
+
+    def put_card_in_hand(self, hand):
+        card = self.give_card()
+        hand.append(card)
+        return hand
 
 
 class Table:
@@ -64,9 +78,6 @@ class Table:
 
     def create_slot(self, slot_id: int):
         self.table_slots.append(Table_Slot(slot_id))
-
-    def player_take_slot(self, player_id: str):
-        pass
 
 
 class Table_Slot:
@@ -135,13 +146,7 @@ the_list_of_players = ['dealer', 'soawesomesonic', 'filinfilin', 'Nightcrowler28
 
 dealer = Dealer()
 new_round = Round(the_list_of_players)
-deck = new_round.create_deck()
 
-
-for i in range(0, len(new_round.table.table_slots)):
-    print(i, new_round.table.table_slots[i].slot_id)
-
-for i in range(0, len(new_round.table.players)):
-    print(i, new_round.table.players[i].player_id)
-
-print(deck)
+#for i in range(0, len(new_round.table.table_slots)):
+#    print(new_round.table.table_slots[i].player_id, 's hand: ', new_round.table.table_slots[i])
+new_round.table.table_slots[1].player_id
