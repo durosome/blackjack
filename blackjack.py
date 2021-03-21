@@ -10,8 +10,39 @@ class Dealer:
     def __init__(self):  # initialization
         pass
 
+    def count_hand(self, hand):
+        hand_sum = 0
+
+        for i in range(0, len(hand)):
+            hand[i] = hand[i][:1]  # clean from suits
+            try:
+                int(hand[i])
+                hand_sum = hand_sum + int(hand[i])
+            except:
+                hand_sum = hand_sum + 0
+                if hand[i] == 'K':
+                    hand_sum = hand_sum + 10
+                if hand[i] == 'Q':
+                    hand_sum = hand_sum + 10
+                if hand[i] == 'J':
+                    hand_sum = hand_sum + 10
+                if hand[i] == 'A':
+                    hand_sum = hand_sum + 0
+
+        for i in range(0, len(hand)):
+            if hand[i] == 'A':
+                if hand_sum < 11:
+                    hand_sum = hand_sum + 11
+                else:
+                    hand_sum = hand_sum + 1
+
+
+        return (hand_sum)
+
     def rule_game(self):  # rule game
         pass
+
+
 
 
 class Round:
@@ -146,4 +177,4 @@ dealer = Dealer()
 new_round = Round(the_list_of_players)
 
 for i in range(0, len(new_round.table.table_slots)):
-    print(new_round.table.table_slots[i].player_id, 's hand: ', new_round.table.table_slots[i].hand)
+    print(new_round.table.table_slots[i].player_id, 's hand: ', new_round.table.table_slots[i].hand, 'Value: ', dealer.count_hand(new_round.table.table_slots[i].hand))
