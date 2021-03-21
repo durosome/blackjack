@@ -1,9 +1,5 @@
 import random
 
-
-
-
-
 class Round:
     """
     class for game rounds.
@@ -92,12 +88,9 @@ class Dealer:
         return (hand_sum)
 
     def game_state(self):
-        return(true)
 
+        return(False)
 
-    def rule_game(self):  # rule game
-
-        pass
 
     def check_bust(self, hand):
         print(dealer.count_hand(hand))
@@ -105,6 +98,15 @@ class Dealer:
             return('Lose')
         else:
             return('OK')
+
+    def round_loop(self):
+        pass
+
+    def game_loop(self):  # rule game
+        while self.game_state() is True:
+            print('the game continue...')
+
+        pass
 
 class Table:
 
@@ -161,9 +163,6 @@ class Table_Slot:
         self.hand = []
 
 
-
-
-
 class Player:
     """
     now it's absolutely useless class, but in future we will add some attributes, like twitch_points
@@ -185,10 +184,8 @@ class Player:
 
 
 the_list_of_players = ['dealer', 'soawesomesonic', 'filinfilin', 'Nightcrowler28', 'Fae_1000', 'Askarchik2282', 'Dima243', 'Are_You_Ready_88', 'Grigory_Skovoroda', '0deala']
-
 dealer = Dealer()
-
-
+dealer.game_loop()
 for i in range(0, len(dealer.new_round.table.table_slots)):
     print('\n', dealer.new_round.table.table_slots[i].player_id, 's hand: ', dealer.new_round.table.table_slots[i].hand, '\nValue: ',
           dealer.count_hand(dealer.new_round.table.table_slots[i].hand), '\nBust state:', dealer.check_bust(dealer.new_round.table.table_slots[i].hand))
