@@ -1,47 +1,6 @@
 import random
 
 
-class Dealer:
-    """
-    game logic class, created for rule the game
-
-    """
-
-    def __init__(self):  # initialization
-        pass
-
-    def count_hand(self, hand):
-        hand_sum = 0
-
-        for i in range(0, len(hand)):
-            hand[i] = hand[i][:1]  # clean from suits
-            try:
-                int(hand[i])
-                hand_sum = hand_sum + int(hand[i])
-            except:
-                hand_sum = hand_sum + 0
-                if hand[i] == 'K':
-                    hand_sum = hand_sum + 10
-                if hand[i] == 'Q':
-                    hand_sum = hand_sum + 10
-                if hand[i] == 'J':
-                    hand_sum = hand_sum + 10
-                if hand[i] == 'A':
-                    hand_sum = hand_sum + 0
-
-        for i in range(0, len(hand)):
-            if hand[i] == 'A':
-                if hand_sum < 11:
-                    hand_sum = hand_sum + 11
-                else:
-                    hand_sum = hand_sum + 1
-
-
-        return (hand_sum)
-
-    def rule_game(self):  # rule game
-        pass
-
 
 
 
@@ -69,8 +28,8 @@ class Round:
         self.create_deck()
 
         for slot_id in range(0, len(players)):  # putting the Players to the Table_Slots
-            if len(self.table.table_slots) < self.max_slots + 1:   # limit the number of players
-                self.table.create_player(players[slot_id])         # create player
+            if len(self.table.table_slots) < self.max_slots + 1:  # limit the number of players
+                self.table.create_player(players[slot_id])  # create player
                 self.table.create_slot(slot_id, players[slot_id])  # create slot
                 self.put_card_in_hand(self.table.table_slots[slot_id].hand)
                 self.put_card_in_hand(self.table.table_slots[slot_id].hand)
@@ -94,6 +53,53 @@ class Round:
         card = self.give_card()
         hand.append(card)
         return card
+
+class Dealer:
+    """
+    interacting interface between players and game
+
+    """
+
+    def __init__(self):  # initialization
+        self.new_round = Round(the_list_of_players)
+
+    def count_hand(self, hand):
+        hand_sum = 0
+
+        for i in range(0, len(hand)):
+            hand[i] = hand[i][:1]  # clean from suits
+            try:
+                int(hand[i])
+                hand_sum = hand_sum + int(hand[i])
+            except:
+                hand_sum = hand_sum + 0
+                if hand[i] == 'K':
+                    hand_sum = hand_sum + 10
+                if hand[i] == 'Q':
+                    hand_sum = hand_sum + 10
+                if hand[i] == 'J':
+                    hand_sum = hand_sum + 10
+                if hand[i] == 'A':
+                    hand_sum = hand_sum + 0
+
+        for i in range(0, len(hand)):
+            if hand[i] == 'A':
+                if hand_sum < 11:
+                    hand_sum = hand_sum + 11
+                else:
+                    hand_sum = hand_sum + 1
+
+        return (hand_sum)
+
+    #def game_state(self):
+     #   if Round.Table.Table_Slot[3].hand
+     #   return(true)
+
+
+    def rule_game(self):  # rule game
+        #while True:
+
+        pass
 
 
 class Table:
@@ -124,24 +130,24 @@ class Table_Slot:
             [    (['4♣', 'K♦'])      (['10♣', 'A♦'])    ]
             [       (dealer)        (soawesomesonic)    ]
 
-    Dealer.Table.Player_Slot[0] is always reserved for DEALER
+    Dealer.Round.Table.Table_Slot[0] is always reserved for DEALER
 
     example usage:
         we can get
             * slot_id
-                    is basically positional number of slot #TODO maybe we can delete this attribute
-            - Dealer.Table.Table_Slot[11].slot_id
-                --it will return us a player_id, looks like: '11'
+                    is basically positional number of slot
+                - Dealer.Round.Table.Table_Slot[11].slot_id
+                        --it will return us a player_id, looks like: '11'
 
             * player_id
                     is player in 7th slot on the table
-            - Dealer.Table.Table_Slot[7].player_id
-                -it will return us a player_id, looks like: 'soawesomesonic'
+                - Dealer.Round.Table.Table_Slot[7].player_id
+                        --it will return us a player_id, looks like: 'soawesomesonic'
 
             * hand
                     hand of player in 3rd slot on the table
-            - Round.Table.Table_Slot[3].hand
-                -it will return us a hand, looks like: ['4♣', 'K♦']
+                - Dealer.Round.Table.Table_Slot[3].hand
+                        --it will return us a hand, looks like: ['4♣', 'K♦']
 
     """
 
@@ -174,7 +180,8 @@ class Player:
 the_list_of_players = ['dealer', 'soawesomesonic', 'filinfilin', 'Nightcrowler28', '1', '3', '5', '88', '99', 'dealer']
 
 dealer = Dealer()
-new_round = Round(the_list_of_players)
 
-for i in range(0, len(new_round.table.table_slots)):
-    print(new_round.table.table_slots[i].player_id, 's hand: ', new_round.table.table_slots[i].hand, 'Value: ', dealer.count_hand(new_round.table.table_slots[i].hand))
+
+for i in range(0, len(dealer.new_round.table.table_slots)):
+    print(dealer.new_round.table.table_slots[i].player_id, 's hand: \n', dealer.new_round.table.table_slots[i].hand, 'Value: ',
+          dealer.count_hand(dealer.new_round.table.table_slots[i].hand))
